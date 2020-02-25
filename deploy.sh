@@ -19,6 +19,7 @@ java -jar BuildTools.jar
 worldName=$USER
 mkdir $worldName
 rsync -a MinecraftUtils/start.sh $worldName
+chmod +x start.sh
 rsync -a MinecraftUtils/config/ $worldName
 
 for file in ./*
