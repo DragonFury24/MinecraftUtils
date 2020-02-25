@@ -19,6 +19,7 @@ java -jar BuildTools.jar
 worldName=$USER
 mkdir $worldName
 rsync -a MinecraftUtils/start.sh $worldName
+rsync -a MinecraftUtils/config/ $worldName
 
 for file in ./*
 do
@@ -30,4 +31,4 @@ done
 #First run of Spigot and accept EULA
 cd $worldName
 java -jar -Xms1G -Xmx1G -jar spigot.jar
-sed 's/false/true/' eula.txt
+sed -i 's/false/true/' eula.txt
