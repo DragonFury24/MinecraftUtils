@@ -1,7 +1,12 @@
 #!/bin/bash
 
-apt update
-apt install default-jre -y
+SUDO=''
+if (( $EUID != 0 )); then
+    SUDO='sudo'
+fi
+
+$SUDO apt update
+$SUDO apt install default-jre -y
 
 cd ..
 wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
