@@ -10,9 +10,9 @@ worldName=$USER
 mkdir $worldName
 rsync -a MinecraftUtils/start.sh $worldName
 
-for file in */
+for file in /*
 do
-if grep -q spigot $file; then
+if grep -q spigot "$file"; then
 rsync -a $file $worldName/spigot.jar
 fi
 done
