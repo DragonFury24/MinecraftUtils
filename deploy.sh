@@ -32,3 +32,11 @@ done
 cd $worldName
 java -jar -Xms1G -Xmx1G -jar spigot.jar
 sed -i 's/false/true/' eula.txt
+
+#Create systemd service to start server at boot and restart on stop
+cd ..
+sed -i 's/**user**/$USER' MinecraftUtils/autostart.service
+sed -i 's/**worldname**/$worldName' MinecraftUtils/autostart.service
+$SUDO rsync MinecraftUtils/autostart.service /etc/systemd/system/$worldName.service
+$SUDO systemctl enable $worldName
+$SUDO systemctl start $worldName

@@ -1,0 +1,12 @@
+[Unit]
+Description=Start **worldname**
+
+[Service]
+Type=forking
+User=**worldname**
+WorkingDirectory=/home/**user**/**worldname**
+ExecStart=/home/**user**/**worldname**/start.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
