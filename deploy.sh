@@ -41,3 +41,10 @@ sed -i "s/\*\*worldname\*\*/$worldName/" MinecraftUtils/autostart.service
 $SUDO rsync MinecraftUtils/autostart.service /etc/systemd/system/$worldName.service
 $SUDO systemctl enable $worldName
 $SUDO systemctl start $worldName
+
+#Delete Spigot jar file after finishing
+for file in ./*
+do
+if grep -q spigot "$file"; then
+rm $file
+fi                                                                                                                      done
