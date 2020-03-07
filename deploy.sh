@@ -1,12 +1,25 @@
 #!/bin/bash
 
-SUDO=''
 if (( $EUID != 0 )); then
-    SUDO='sudo'
+  clear
+  clear
+  echo -e "${RED}#########################################################################${RESET}"
+  echo ""
+  echo -e "${WHITE_R}#${RESET} The script need to be run as root..."
+  echo ""
+  echo ""
+  echo -e "${WHITE_R}#${RESET} For Ubuntu based systems run the command below to login as root"
+  echo -e "${GREEN}#${RESET} sudo -i"
+  echo ""
+  echo -e "${WHITE_R}#${RESET} For Debian based systems run the command below to login as root"
+  echo -e "${GREEN}#${RESET} su"
+  echo ""
+  echo ""
+  exit 1
 fi
 
-$SUDO apt update
-$SUDO apt install default-jre -y
+apt update
+apt install default-jre -y
 
 cd ..
 
@@ -38,9 +51,9 @@ sed -i 's/false/true/' eula.txt
 cd ..
 sed -i "s/\*\*user\*\*/$USER/" MinecraftUtils/autostart.service
 sed -i "s/\*\*worldname\*\*/$worldName/" MinecraftUtils/autostart.service
-$SUDO rsync MinecraftUtils/autostart.service /etc/systemd/system/$worldName.service
-$SUDO systemctl enable $worldName
-$SUDO systemctl start $worldName
+rsync MinecraftUtils/autostart.service /etc/systemd/system/$worldName.service
+systemctl enable $worldName
+systemctl start $worldName
 
 #Delete Spigot jar file after finishing
 for file in ./*
